@@ -57,6 +57,7 @@ def greeting_user(hour: int) -> str:
 
 
 def greeting_user_input(date: str) -> str:
+    """Функция выводит приветствие в зависимости от переданной даты"""
     dt = datetime.datetime.strptime(date, "%Y-%m-%d %H:%M:%S")
     dt_hour = dt.hour
     if 5 <= dt_hour < 12:
@@ -71,6 +72,10 @@ def greeting_user_input(date: str) -> str:
 
 
 def get_card_details(data_frame_xlsx: pd.DataFrame) -> list[dict]:
+    """Функция сортирует операции и выводит каждой карте:
+    последние 4 цифры карты;
+    общая сумма расходов;
+    кешбэк (1 рубль на каждые 100 рублей)"""
     sort = data_frame_xlsx.loc[(data_frame_xlsx["Статус"] == "OK") & (data_frame_xlsx["Сумма операции"] < 0)]
     filter_cards = sort.groupby("Номер карты")["Сумма операции"].sum()
     dict_filter = filter_cards.to_dict()
@@ -89,6 +94,7 @@ def get_card_details(data_frame_xlsx: pd.DataFrame) -> list[dict]:
 
 
 def top_five_transaction(data_frame_xlsx: pd.DataFrame) -> list[dict]:
+    """Функция выводит топ-5 транзакций"""
     top_five = []
     sorted_by_price_desc = data_frame_xlsx.sort_values(by="Сумма операции", ignore_index=True).head()
     sorted_five_transaction = sorted_by_price_desc.to_dict(orient="records")
