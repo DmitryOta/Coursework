@@ -26,9 +26,9 @@ WEY_TO_FILE_XL = os.path.join(os.path.dirname(__file__), "../data/operations.xls
 
 def reading_financial_transactions_xl(WEY_TO_FILE_XL: str) -> pd.DataFrame:
     """Функция считывает финансовые операции из xlsx файла и фозвращает список словарей с транзакциями"""
-    data_frame_xlsx = pd.read_excel(WEY_TO_FILE_XL)
+    df = pd.read_excel(WEY_TO_FILE_XL)
 
-    return data_frame_xlsx
+    return df
 
 
 data_frame_xlsx = reading_financial_transactions_xl(WEY_TO_FILE_XL)
