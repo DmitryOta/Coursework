@@ -1,14 +1,14 @@
-import json
-import pandas as pd
-import re
 import datetime
-from typing import Optional
+import json
+import re
+from typing import Optional, Any, Callable
 
-from src.main_page import data_frame_xlsx
+import pandas as pd
 
 
-def decorator(func):
-    def wrapper(*args, **kwargs):
+def decorator(func: Callable) -> str:
+    """Функция декоратор записывает результат работы функции в файл reports.json"""
+    def wrapper(*args: Any, **kwargs: Any) -> Callable:
         result = func(*args, **kwargs)
         with open("../data/reports.json", "w", encoding="utf8") as file:
             file.write(result)
@@ -17,8 +17,8 @@ def decorator(func):
     return wrapper
 
 
-@decorator
 def spending_by_category(transactions: pd.DataFrame, category: str, user_date: Optional[str] = None) -> str:
+    """Функция возвращает отсортированый датафрейм в виде JSON файла"""
     transactions["Категория"] = transactions["Категория"].fillna("Нет категории")
     dict_filter = transactions.to_dict(orient="records")
     pattern = re.compile(category, flags=re.IGNORECASE)
@@ -52,18 +52,3 @@ def spending_by_category(transactions: pd.DataFrame, category: str, user_date: O
     else:
         json_data = json.dumps(result, indent=4, ensure_ascii=False)
         return json_data
-
-
-if __name__ == "__main__":
-    test_data = {
-        'Дата операции': ['01.10.2023 12:00:00', '02.10.2023 13:00:00', '03.10.2023 14:00:00', '04.10.2023 15:00:00'],
-        'Категория': ['Продукты', 'Транспорт', 'Развлечения', 'Продукты'],
-        'Сумма операции': [100.00, 200.00, 300.00, 400.00],
-    }
-    df = pd.DataFrame(test_data)
-    print(df)
-    category = "транспорт"
-    data = '01.11.2023'
-
-    result = spending_by_category(df, category, data)
-    print(result)

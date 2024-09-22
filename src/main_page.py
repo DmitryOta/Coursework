@@ -1,5 +1,4 @@
 import datetime
-import json
 import os
 from time import sleep
 
@@ -25,11 +24,6 @@ def reading_financial_transactions_xl(WEY_TO_FILE_XL: str) -> pd.DataFrame:
 
 
 data_frame_xlsx = reading_financial_transactions_xl(WEY_TO_FILE_XL)
-
-
-
-
-
 
 
 def greeting_user() -> str:
@@ -125,7 +119,7 @@ def exchange_rate(list_currencies: list) -> list[dict]:
     return currency
 
 
-def stocks_from_the_SP500(user_stocks) -> list[dict]:
+def stocks_from_the_SP500(user_stocks: list) -> list[dict]:
     """Функция возвращает топ 5 акций S&P 500"""
     stocks_price = []
     for i in user_stocks:
