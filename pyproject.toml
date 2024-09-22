@@ -11,7 +11,6 @@ python-dotenv = "^1.0.1"
 pandas = "^2.2.2"
 openpyxl = "^3.1.5"
 pandas-stubs = "^2.2.2.240909"
-pytest = "^8.3.3"
 
 
 [tool.poetry.group.lint.dependencies]
@@ -23,9 +22,9 @@ mypy = "^1.11.2"
 
 [tool.poetry.group.dev.dependencies]
 requests = "^2.32.3"
-pytest = "^8.3.3"
 pytest-cov = "^5.0.0"
 types-requests = "^2.32.0.20240914"
+pytest = "^8.3.3"
 
 [tool.black]
 line-length = 119

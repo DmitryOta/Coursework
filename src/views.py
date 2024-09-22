@@ -6,9 +6,16 @@ from src.main_page import (
     get_card_details,
     greeting_user,
     greeting_user_input,
-    real_time,
     stocks_from_the_SP500,
 )
+
+
+with open("../data/user_settings.json") as f:
+   stock = json.load(f)
+
+
+USER_STOCKS = stock["user_stocks"]
+USER_CURRENCIES = stock["user_currencies"]
 
 
 def func_input_data() -> None:
@@ -17,11 +24,11 @@ def func_input_data() -> None:
     if user_input:
         greeting = greeting_user_input(user_input)
     else:
-        greeting = greeting_user(real_time())
+        greeting = greeting_user()
     main_page["greeting"] = greeting
     main_page["cards"] = get_card_details(data_frame_xlsx)
-    main_page["currency_rates"] = exchange_rate()
-    main_page["stock_prices"] = stocks_from_the_SP500()
+    main_page["currency_rates"] = exchange_rate(USER_CURRENCIES)
+    main_page["stock_prices"] = stocks_from_the_SP500(USER_STOCKS)
     with open("../data/main_page.json", "w", encoding="UTF-8") as f:
         json.dump(main_page, f, indent=4, ensure_ascii=False)
 

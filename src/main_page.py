@@ -27,17 +27,15 @@ def reading_financial_transactions_xl(WEY_TO_FILE_XL: str) -> pd.DataFrame:
 data_frame_xlsx = reading_financial_transactions_xl(WEY_TO_FILE_XL)
 
 
-def real_time() -> int:
-    """Функция возвращает настоящее время в часах"""
-    hour = datetime.datetime.now().hour
-    return hour
 
 
-hour = real_time()
 
 
-def greeting_user(hour: int) -> str:
+
+def greeting_user() -> str:
     """Функция выводит приветствие в зависимости от времени суток"""
+    time = datetime.datetime.now()
+    hour = time.hour
     if 5 <= hour < 12:
         greeting = "Доброе утро"
     elif 12 <= hour < 17:
@@ -101,15 +99,11 @@ def top_five_transaction(data_frame_xlsx: pd.DataFrame) -> list[dict]:
     return top_five
 
 
-def exchange_rate() -> list[dict]:
-    """Функция аозвращает курс USD и EUR к RUB"""
+def exchange_rate(list_currencies: list) -> list[dict]:
+    """Функция возвращает курс USD и EUR к RUB"""
     currency = []
-    with open("../data/user_settings.json") as f:
-        stock = json.load(f)
-
-    USER_CURRENCIES = stock["user_currencies"]
     url = "https://exchange-rates.abstractapi.com/v1/live/"
-    for i in USER_CURRENCIES:
+    for i in list_currencies:
         base = f"&base={i}"
         response = requests.get(f"{url}{api_key}{base}")
         status_code = response.status_code
@@ -131,14 +125,10 @@ def exchange_rate() -> list[dict]:
     return currency
 
 
-def stocks_from_the_SP500() -> list[dict]:
+def stocks_from_the_SP500(user_stocks) -> list[dict]:
     """Функция возвращает топ 5 акций S&P 500"""
     stocks_price = []
-    with open("../data/user_settings.json") as f:
-        stock = json.load(f)
-
-    USER_STOCKS = stock["user_stocks"]
-    for i in USER_STOCKS:
+    for i in user_stocks:
         api_url = f"https://api.marketstack.com/v1/intraday?access_key={KEY_API_SP500}&symbols={i}"
         response = requests.get(api_url)
         prices = response.json()
