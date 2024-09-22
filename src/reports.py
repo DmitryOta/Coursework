@@ -29,7 +29,7 @@ def spending_by_category(transactions: pd.DataFrame, category: str, user_date: O
         for key in dict_filter:
             if (
                 pattern.search(key["Категория"])
-                and first_date <= datetime.datetime.strptime(key["Дата операции"], "%d.%m.%Y %H:%M:%S") < user_date
+                and first_date <= datetime.datetime.strptime(key["Дата операции"], "%d.%m.%Y %H:%M:%S") <= user_date
             ):
                 result.append(key)
             else:
@@ -38,9 +38,10 @@ def spending_by_category(transactions: pd.DataFrame, category: str, user_date: O
         user_date = datetime.datetime.strptime(user_date, "%d.%m.%Y")
         first_date = user_date - datetime.timedelta(days=30 * 3 + 2)
         for key in dict_filter:
+            print(key)
             if (
                 pattern.search(key["Категория"])
-                and first_date <= datetime.datetime.strptime(key["Дата операции"], "%d.%m.%Y %H:%M:%S") < user_date
+                and first_date <= datetime.datetime.strptime(key["Дата операции"], "%d.%m.%Y %H:%M:%S") <= user_date
             ):
                 result.append(key)
             else:
@@ -54,25 +55,15 @@ def spending_by_category(transactions: pd.DataFrame, category: str, user_date: O
 
 
 if __name__ == "__main__":
-    # user_date = datetime.datetime.today().date()
-    data = "11.09.2020"
-    # user_date = datetime.datetime.strptime(data, "%d-%m-%Y")
-    # mounth = user_date.month - 3
-    # first_date = user_date - datetime.timedelta(days=30 * 3 + 2)
-    # print(first_date)
-    category = "красота"
-    # user_date = datetime.datetime.today().date()
-    # user_date_2 = datetime.datetime.now().date()
-    result = spending_by_category(data_frame_xlsx, category, data)
-    print(result)
-    # print(user_date)
-    # print(user_date_2)
-    # data = "11-05-2023"
-    # user_date = datetime.datetime.strptime(data, "%d-%m-%Y")
-    # print(user_date)
-    # first_day = user_date - datetime.timedelta(weeks=13, days=1)
-    # print(first_day)
+    test_data = {
+        'Дата операции': ['01.10.2023 12:00:00', '02.10.2023 13:00:00', '03.10.2023 14:00:00', '04.10.2023 15:00:00'],
+        'Категория': ['Продукты', 'Транспорт', 'Развлечения', 'Продукты'],
+        'Сумма операции': [100.00, 200.00, 300.00, 400.00],
+    }
+    df = pd.DataFrame(test_data)
+    print(df)
+    category = "транспорт"
+    data = '01.11.2023'
 
-    # category = "Красота"
-    # result = spending_by_category(data_frame_xlsx, category)
-    # print(result)
+    result = spending_by_category(df, category, data)
+    print(result)
