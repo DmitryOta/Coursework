@@ -1,7 +1,14 @@
 import json
 
-from src.main_page import (data_frame_xlsx, exchange_rate, get_card_details, greeting_user, greeting_user_input,
-                           real_time, stocks_from_the_SP500)
+from src.main_page import (
+    data_frame_xlsx,
+    exchange_rate,
+    get_card_details,
+    greeting_user,
+    greeting_user_input,
+    real_time,
+    stocks_from_the_SP500,
+)
 
 
 def func_input_data() -> None:

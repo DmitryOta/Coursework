@@ -13,13 +13,6 @@ api_key = f"?api_key={KEY_API}"
 
 KEY_API_SP500 = os.getenv("KEY_API_S&P_500")
 
-with open("../data/user_settings.json") as f:
-    stock = json.load(f)
-
-
-USER_CURRENCIES = stock["user_currencies"]
-USER_STOCKS = stock["user_stocks"]
-
 
 WEY_TO_FILE_XL = os.path.join(os.path.dirname(__file__), "../data/operations.xlsx")
 
@@ -111,6 +104,10 @@ def top_five_transaction(data_frame_xlsx: pd.DataFrame) -> list[dict]:
 def exchange_rate() -> list[dict]:
     """Функция аозвращает курс USD и EUR к RUB"""
     currency = []
+    with open("../data/user_settings.json") as f:
+        stock = json.load(f)
+
+    USER_CURRENCIES = stock["user_currencies"]
     url = "https://exchange-rates.abstractapi.com/v1/live/"
     for i in USER_CURRENCIES:
         base = f"&base={i}"
@@ -137,6 +134,10 @@ def exchange_rate() -> list[dict]:
 def stocks_from_the_SP500() -> list[dict]:
     """Функция возвращает топ 5 акций S&P 500"""
     stocks_price = []
+    with open("../data/user_settings.json") as f:
+        stock = json.load(f)
+
+    USER_STOCKS = stock["user_stocks"]
     for i in USER_STOCKS:
         api_url = f"https://api.marketstack.com/v1/intraday?access_key={KEY_API_SP500}&symbols={i}"
         response = requests.get(api_url)
