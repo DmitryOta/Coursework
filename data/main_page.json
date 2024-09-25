@@ -1,5 +1,5 @@
 {
-    "greeting": "Добрый вечер",
+    "greeting": "Добрый день",
     "cards": [
         {
             "last_digits": "4556",
@@ -30,23 +30,23 @@
     "stock_prices": [
         {
             "stock": "AAPL",
-            "prise": 229.2
+            "prise": 225.73
         },
         {
             "stock": "AMZN",
-            "prise": 187.41
+            "prise": 190.13
         },
         {
             "stock": "GOOGL",
-            "prise": 162.06
+            "prise": 160.71
         },
         {
             "stock": "MSFT",
-            "prise": 434.245
+            "prise": 426.13
         },
         {
             "stock": "TSLA",
-            "prise": 235.895
+            "prise": 249.295
         }
     ]
 }

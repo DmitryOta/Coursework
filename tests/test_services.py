@@ -1,6 +1,6 @@
 import pandas as pd
 
-from src.search import sorting_transactions
+from src.services import sorting_transactions
 
 
 def test_sorting_transactions_with_valid_data():

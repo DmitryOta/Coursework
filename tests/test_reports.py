@@ -31,10 +31,13 @@ def test_spending_by_category_with_valid_data_and_no_date():
     data = "01.11.2023"
 
     result = spending_by_category(df, category, data)
-    assert result == """[
+    assert (
+        result
+        == """[
     {
         "Дата операции": "02.10.2023 13:00:00",
         "Категория": "Транспорт",
         "Сумма операции": 200.0
     }
 ]"""
+    )
