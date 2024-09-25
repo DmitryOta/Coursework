@@ -1,0 +1,52 @@
+{
+    "greeting": "Добрый день",
+    "cards": [
+        {
+            "last_digits": "4556",
+            "total_spending": -1006659.05,
+            "cashback": -10066.59
+        },
+        {
+            "last_digits": "5091",
+            "total_spending": -17367.5,
+            "cashback": -173.68
+        },
+        {
+            "last_digits": "7197",
+            "total_spending": -2380912.73,
+            "cashback": -23809.13
+        }
+    ],
+    "currency_rates": [
+        {
+            "currency": "USD",
+            "rate": 105.0
+        },
+        {
+            "currency": "EUR",
+            "rate": 117.2
+        }
+    ],
+    "stock_prices": [
+        {
+            "stock": "AAPL",
+            "prise": 225.73
+        },
+        {
+            "stock": "AMZN",
+            "prise": 190.13
+        },
+        {
+            "stock": "GOOGL",
+            "prise": 160.71
+        },
+        {
+            "stock": "MSFT",
+            "prise": 426.13
+        },
+        {
+            "stock": "TSLA",
+            "prise": 249.295
+        }
+    ]
+}
